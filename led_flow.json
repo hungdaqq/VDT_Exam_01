@@ -1,0 +1,146 @@
+{
+  "ruleChain": {
+    "additionalInfo": {
+      "description": ""
+    },
+    "name": "Led_flow",
+    "projectId": null,
+    "firstRuleNodeId": null,
+    "root": false,
+    "debugMode": true,
+    "configuration": null
+  },
+  "metadata": {
+    "firstNodeIndex": 6,
+    "nodes": [
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 698,
+          "layoutY": 305
+        },
+        "type": "org.iot.rule.engine.transform.TbTransformMsgNode",
+        "name": "filter",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "\nreturn {msg: {\"code\":1}, metadata: metadata, msgType: \"POST_TELEMETRY_REQUEST\"};"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1001,
+          "layoutY": 302
+        },
+        "type": "org.iot.rule.engine.mqtt.PublishMqttToDeviceNode",
+        "name": "to device",
+        "debugMode": true,
+        "configuration": {
+          "topicPattern": "messages/${deviceID}/status",
+          "retain": false
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 697,
+          "layoutY": 210
+        },
+        "type": "org.iot.rule.engine.transform.TbTransformMsgNode",
+        "name": "filter",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "\nreturn {msg: msg, metadata: metadata, msgType: \"POST_TELEMETRY_REQUEST\"};"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 997,
+          "layoutY": 101
+        },
+        "type": "org.iot.rule.engine.telemetry.TbMsgAttributesNode",
+        "name": "save att",
+        "debugMode": true,
+        "configuration": {
+          "scope": "SERVER_SCOPE",
+          "notifyDevice": null,
+          "loggedHistory": null
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 1002,
+          "layoutY": 210
+        },
+        "type": "org.iot.rule.engine.mqtt.PublishMqttToDeviceNode",
+        "name": "to device",
+        "debugMode": true,
+        "configuration": {
+          "topicPattern": "messages/${deviceID}/status",
+          "retain": false
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 695,
+          "layoutY": 105
+        },
+        "type": "org.iot.rule.engine.transform.TbTransformMsgNode",
+        "name": "save statust",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "var {st} = msg\nif (st == 1) st = true\nelse st = false\nreturn {msg:{isLedOn:st}, metadata: metadata, msgType: msgType};"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 356,
+          "layoutY": 101
+        },
+        "type": "org.iot.rule.engine.filter.TbJsSwitchNode",
+        "name": "switch",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "return [metadata.topic]"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "fromIndex": 0,
+        "toIndex": 1,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 4,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 5,
+        "toIndex": 3,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 6,
+        "toIndex": 0,
+        "type": "status"
+      },
+      {
+        "fromIndex": 6,
+        "toIndex": 2,
+        "type": "update"
+      },
+      {
+        "fromIndex": 6,
+        "toIndex": 5,
+        "type": "update"
+      }
+    ],
+    "ruleChainConnections": null
+  }
+}
