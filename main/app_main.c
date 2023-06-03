@@ -273,9 +273,9 @@ void app_main(void)
     gpio_ouput_init(&io_conf,LED_PIN);
     //task button_task la task xu ly nut bam
     xTaskCreate(button_task, "button_task", 2048, NULL, 10, NULL);
-    //task led_task la task xu ly task1 trong de bai
+    //task led_task la task xu ly task2 trong de bai
     xTaskCreate(led_task, "led_task", 4096, NULL, 10, &Led_TASK);
-    //task smart_config dung de xu ly smart config
+    //task smart_config dung de xu ly smart config trong task 2
     xTaskCreate(smart_config, "smart_config", 2048, NULL, 10, NULL);
     //task send_heart dung de xu ly task3 trong de bai
     xTaskCreate(send_heart, "send_heart", 2048, NULL, 11, &heart);
