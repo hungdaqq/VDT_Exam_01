@@ -12,6 +12,6 @@
 <br />
 <div align="center">
   <a href="https://github.com/hungdaqq/Smarthome-IoT">
-    <img src="FlowEngine.png" alt="Logo" width="800" height="630">
+    <img src="FlowEngine.png" alt="Logo" width="800" height="300">
   </a>
 </div>
