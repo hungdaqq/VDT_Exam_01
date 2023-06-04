@@ -214,7 +214,7 @@ int time_out = 3000;
 void send_heart(void* parameter) {
     char message[] = "{\"heartbeat\": 1}";
     while (1) {
-        esp_mqtt_client_publish(client,status_topic, message, 0, 0, 1);
+        esp_mqtt_client_publish(client,update_topic, message, 0, 0, 1);
         vTaskDelay(time_out/ portTICK_PERIOD_MS);
         if(response) {
             vTaskDelay(60000 - time_out/ portTICK_PERIOD_MS);  
