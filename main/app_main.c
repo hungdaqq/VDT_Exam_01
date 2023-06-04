@@ -223,7 +223,7 @@ void smart_config(void* parameter) {
     while (1) {
         xEventGroupWaitBits(s_wifi_event_group, SMART_CONFIG_BIT, true, false, portMAX_DELAY);
             EventBits_t bits = xEventGroupGetBits(s_wifi_event_group);
-            //Kiem tra neu co truoc noi tu truoc do thi se ngat ket noi mqtt
+            //Kiem tra neu co ket noi mqtt tu truoc do thi se ngat ket noi mqtt
             if (bits & ESPTOUCH_DONE_BIT) {
                 esp_mqtt_client_stop(client);
                 xEventGroupClearBits(s_wifi_event_group, ESPTOUCH_DONE_BIT);
